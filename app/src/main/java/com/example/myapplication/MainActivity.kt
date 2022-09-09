@@ -38,16 +38,48 @@ class MainActivity : AppCompatActivity() {
         resultado.text="$sumar"
     }
     private fun clickRestar(){
+        val text3: TextView =findViewById(R.id.number1)
+        val number1:String=text3.text.toString()
+        val number1Int: Int=number1.toInt()
 
+        val text4: TextView =findViewById(R.id.number2)
+        val number2:String=text4.text.toString()
+        val number2Int: Int=number2.toInt()
+
+        val resultado: TextView =findViewById(R.id.result)
+
+        val restar = number1Int-number2Int
+
+        resultado.text="$restar"
     }
     private fun clickMultipicar(){
+        val text5: TextView =findViewById(R.id.number1)
+        val number1:String=text5.text.toString()
+        val number1Int: Int=number1.toInt()
 
+        val text6: TextView =findViewById(R.id.number2)
+        val number2:String=text6.text.toString()
+        val number2Int: Int=number2.toInt()
+
+        val resultado: TextView =findViewById(R.id.result)
+
+        val multiplicar = number1Int*number2Int
+
+        resultado.text="$multiplicar"
     }
     private fun clickDvividir(){
+        val text7: TextView =findViewById(R.id.number1)
+        val number1:String=text7.text.toString()
+        val number1Int: Int=number1.toInt()
 
+        val text8: TextView =findViewById(R.id.number2)
+        val number2:String=text8.text.toString()
+        val number2Int: Int=number2.toInt()
+
+        val resultado: TextView =findViewById(R.id.result)
+
+        val dividir = number1Int/number2Int
+
+        resultado.text="$dividir"
     }
-    private fun clickIgual(){
-
-    }
-
 }
