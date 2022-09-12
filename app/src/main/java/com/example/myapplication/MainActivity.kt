@@ -1,13 +1,14 @@
 package com.example.myapplication
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
-
+    var txtResultado: TextView? = null
+    val historial = mutableListOf<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,6 +22,24 @@ class MainActivity : AppCompatActivity() {
         botonMultiplicar.setOnClickListener { clickMultipicar() }
         val botonDividir: Button =findViewById(R.id.btnDividir)
         botonDividir.setOnClickListener { clickDvividir() }
+
+        val miBoton: Button = findViewById(R.id.btnIngresar)
+        miBoton.setOnClickListener { onClick(1) }
+    }
+    private fun onClick(boton:Int){
+        when(boton) {
+            1 -> {
+                //Se crea el intent encargador de la comunicacion entre activities
+                val intent = Intent(this, ActivityResultados::class.java)
+                //Creamos el bundle para el paso de informacion entre activities
+                val miBundle:Bundle = Bundle()
+                miBundle.putString("Numeros",historial.toString())
+                //Se le agrega informacion al intent para que sea enviada
+                intent.putExtras(miBundle)
+                //Iniciamos el llamado a la nueva actividad
+                startActivity(intent)
+            }
+        }
     }
     private fun clickSumar(){
         val text1: TextView =findViewById(R.id.number1)
@@ -31,11 +50,13 @@ class MainActivity : AppCompatActivity() {
         val number2:String=text2.text.toString()
         val number2Int: Int=number2.toInt()
 
-        val resultado: TextView =findViewById(R.id.result)
+        txtResultado=findViewById(R.id.txtResultado)
 
         val sumar = number1Int+number2Int
 
-        resultado.text="$sumar"
+        historial.add(sumar.toString())
+
+        txtResultado!!.text="La suma es $sumar"
     }
     private fun clickRestar(){
         val text3: TextView =findViewById(R.id.number1)
@@ -46,11 +67,13 @@ class MainActivity : AppCompatActivity() {
         val number2:String=text4.text.toString()
         val number2Int: Int=number2.toInt()
 
-        val resultado: TextView =findViewById(R.id.result)
+        txtResultado=findViewById(R.id.txtResultado)
 
         val restar = number1Int-number2Int
 
-        resultado.text="$restar"
+        historial.add(restar.toString())
+
+        txtResultado!!.text="La resta es $restar"
     }
     private fun clickMultipicar(){
         val text5: TextView =findViewById(R.id.number1)
@@ -61,11 +84,13 @@ class MainActivity : AppCompatActivity() {
         val number2:String=text6.text.toString()
         val number2Int: Int=number2.toInt()
 
-        val resultado: TextView =findViewById(R.id.result)
+        txtResultado=findViewById(R.id.txtResultado)
 
         val multiplicar = number1Int*number2Int
 
-        resultado.text="$multiplicar"
+        historial.add(multiplicar.toString())
+
+        txtResultado!!.text="La multiplicacion es $multiplicar"
     }
     private fun clickDvividir(){
         val text7: TextView =findViewById(R.id.number1)
@@ -76,10 +101,12 @@ class MainActivity : AppCompatActivity() {
         val number2:String=text8.text.toString()
         val number2Int: Int=number2.toInt()
 
-        val resultado: TextView =findViewById(R.id.result)
+        txtResultado=findViewById(R.id.txtResultado)
 
         val dividir = number1Int/number2Int
 
-        resultado.text="$dividir"
+        historial.add(dividir.toString())
+
+        txtResultado!!.text="La division es $dividir"
     }
 }
