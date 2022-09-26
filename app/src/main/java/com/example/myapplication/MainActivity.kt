@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this, RegistroLogin::class.java)
         //Iniciamos el llamado a la nueva actividad
         startActivity(intent)
-        Toast.makeText(this,"Cerro sesion correctamente", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this,"Se ha cerrado sesion", Toast.LENGTH_SHORT).show()
     }
 
 
