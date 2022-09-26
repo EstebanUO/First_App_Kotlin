@@ -1,10 +1,14 @@
 package com.example.myapplication
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
+
 
 class MainActivity : AppCompatActivity() {
     var txtResultado: TextView? = null
@@ -22,6 +26,9 @@ class MainActivity : AppCompatActivity() {
         botonMultiplicar.setOnClickListener { clickMultipicar() }
         val botonDividir: Button =findViewById(R.id.btnDividir)
         botonDividir.setOnClickListener { clickDvividir() }
+
+        val botonClose: Button =findViewById(R.id.buttonClose)
+        botonClose.setOnClickListener{ clickClose() }
 
         val miBoton: Button = findViewById(R.id.btnIngresar)
         miBoton.setOnClickListener { onClick(1) }
@@ -58,6 +65,21 @@ class MainActivity : AppCompatActivity() {
 
         txtResultado!!.text="La suma es $sumar"
     }
+
+    private fun clickClose(){
+        var preferences:SharedPreferences=getSharedPreferences("credenciales",Context.MODE_PRIVATE)
+        var editor:SharedPreferences.Editor=preferences.edit()
+        editor.putString("user","No existe la información")
+        editor.putString("pass","No existe la información")
+        editor.commit()
+        //Se crea el intent encargador de la comunicacion entre activities
+        val intent = Intent(this, RegistroLogin::class.java)
+        //Iniciamos el llamado a la nueva actividad
+        startActivity(intent)
+        Toast.makeText(this,"Cerro sesion correctamente", Toast.LENGTH_SHORT).show()
+    }
+
+
     private fun clickRestar(){
         val text3: TextView =findViewById(R.id.number1)
         val number1:String=text3.text.toString()

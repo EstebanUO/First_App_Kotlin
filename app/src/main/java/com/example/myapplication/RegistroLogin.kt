@@ -9,6 +9,7 @@ import android.widget.Toast
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.preference.PreferenceManager
 
 class RegistroLogin : AppCompatActivity() {
     var campoUsuario:EditText?=null
@@ -43,15 +44,6 @@ class RegistroLogin : AppCompatActivity() {
         txtPass?.text=pass
         editor.commit()
         Toast.makeText(this,"Se han registrado los datos",Toast.LENGTH_SHORT).show()
-
-        //Se crea el intent encargador de la comunicacion entre activities
-        val intent = Intent(this, MainActivity::class.java)
-        //Creamos el bundle para el paso de informacion entre activities
-        val miBundle:Bundle = Bundle()
-        //Se le agrega informacion al intent para que sea enviada
-        intent.putExtras(miBundle)
-        //Iniciamos el llamado a la nueva actividad
-        startActivity(intent)
     }
     private fun cargarDatos() {
         var preferences:SharedPreferences=getSharedPreferences("credenciales",Context.MODE_PRIVATE)
@@ -59,5 +51,16 @@ class RegistroLogin : AppCompatActivity() {
         var pass: String? =preferences.getString("pass","No existe la información")
         txtUsuario?.text=user
         txtPass?.text=pass
+
+        if (user != "No existe la información" && pass != "No existe la información"){
+            //Se crea el intent encargador de la comunicacion entre activities
+            val intent = Intent(this, MainActivity::class.java)
+            //Creamos el bundle para el paso de informacion entre activities
+            val miBundle:Bundle = Bundle()
+            //Se le agrega informacion al intent para que sea enviada
+            intent.putExtras(miBundle)
+            //Iniciamos el llamado a la nueva actividad
+            startActivity(intent)
+        }
     }
 }
